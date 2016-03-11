@@ -3,7 +3,7 @@
 /**
  * Plugin Name: DB tools for WP-CLI
  * Description: <code>$wp help db-table</code>
- * Plugin URL:
+ * Plugin URL:  https://github.com/inpsyde/wp-db-tools-cli
  * Author:      Inpsyde GmbH
  * Author URL:  http://inpsyde.com/
  * Version:     1.0.0-alhpa
