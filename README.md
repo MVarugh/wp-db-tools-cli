@@ -20,3 +20,12 @@ $ wp db-table delete <TABLE> [--no_confirm]
 ```
 $ wp db-table create < table_schema.json
 ```
+
+## Installation
+
+Clone the repository and run composer:
+
+```
+$ git clone git@github.com:inpsyde/wp-db-tools-cli.git && cd wp-db-tools-cli
+$ composer install --prefer-dist --optimize-autoloader
+```
