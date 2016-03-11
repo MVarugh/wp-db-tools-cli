@@ -1,0 +1,57 @@
+{
+  "name": "inpsyde/wp-db-tools-cli",
+  "description": "WP-CLI commands to perform various actions on the database.",
+  "license": "MIT",
+  "type": "wordpress-plugin",
+  "authors" : [
+    {
+      "name": "Inpsyde GmbH",
+      "role": "Company",
+      "homepage": "http://inpsyde.com"
+    },
+    {
+      "name": "David Naber",
+      "email": "kontakt@dnaber.de",
+      "homepage": "https://dnaber.de/",
+      "role": "Developer"
+    }
+  ],
+  "minimum-stability": "dev",
+  "require": {
+    "php": ">=5.5.0",
+    "inpsyde/wp-db-tools": "dev-master",
+    "dangoodman/composer-for-wordpress": "^1.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "WpDbToolsCli\\": "src/"
+    }
+  },
+  "config": {
+    "platform": {
+      "php": "5.5"
+    }
+  },
+  "require-dev": {
+    "brain/monkey": "^1.3",
+    "mockery/mockery": "^0.9.4"
+  },
+  "suggest": {
+    "johnpbloch/wordpress": "WordPress core",
+    "wp-cli/wp-cli": "WordPress command line interface"
+  },
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/inpsyde/wp-db-types.git"
+    },
+    {
+      "type": "vcs",
+      "url": "https://github.com/inpsyde/wp-prepared-statements-converter.git"
+    },
+    {
+      "type": "vcs",
+      "url": "https://github.com/inpsyde/wp-db-tools.git"
+    }
+  ]
+}
