@@ -49,6 +49,7 @@ class DbTable extends WP_CLI_Command {
 			? new Type\NamedTable( $args[ 1 ] )
 			: NULL;
 
+		// @todo WP-CLI seems to lookup for all required parameter as well
 		if ( ! $table || ! $new_table ) {
 			WP_CLI::error( 'Missing argument. See `wp help db-table copy`' );
 		}
@@ -115,6 +116,35 @@ class DbTable extends WP_CLI_Command {
 	public function create( array $args, array $assoc_args ) {
 
 		WP_CLI::line( 'Command not implemented yet. Aborting!' );
+		exit( 1 );
+	}
+
+	/**
+	 * Checks if a database table exists
+	 *
+	 * @synopsis <TABLE>
+	 *
+	 * @param array $args
+	 * @param array $assoc_args
+	 */
+	public function exists( array $args, array $assoc_args ) {
+
+		if ( empty( $args[ 0 ] ) )
+			return;
+
+		$lookup = new Action\MySqlTableLookup(
+			new Db\WpDbAdapter( $GLOBALS[ 'wpdb' ] )
+		);
+
+		if ( $lookup->table_exists( $args[ 0 ] ) ) {
+			WP_CLI::success( "Table {$args[ 0 ]} exists" );
+			exit;
+		}
+
+		//@todo check the correct API on STDOUT/ERR for this command
+		// How to return a »boolean« value on STDOUT?
+
+		WP_CLI::error( "Table {$args[ 0 ]} does not exist" );
 		exit( 1 );
 	}
 }
