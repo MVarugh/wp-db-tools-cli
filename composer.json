@@ -19,8 +19,7 @@
 	"minimum-stability": "dev",
 	"require": {
 		"php": ">=5.5.0",
-		"inpsyde/wp-db-tools": "dev-master",
-		"dangoodman/composer-for-wordpress": "^1.0"
+		"inpsyde/wp-db-tools": "dev-master"
 	},
 	"autoload": {
 		"psr-4": {
