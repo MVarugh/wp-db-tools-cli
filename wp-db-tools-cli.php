@@ -19,11 +19,14 @@ use
 add_action( 'wp_loaded', function() {
 
 	$autoload = __DIR__ . '/vendor/autoload.php';
-	if ( file_exists( $autoload ) )
+	if ( is_readable( $autoload ) ) {
 		require_once $autoload;
+	}
 
-	if ( is_wp_cli() )
+	if ( is_wp_cli() ) {
 		WP_CLI::add_command( 'db-table', WpCliCommand\DbTable::class );
+		WP_CLI::add_command( 'db-tool', WpCliCommand\DbTool::class );
+	}
 } );
 
 /**
