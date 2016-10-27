@@ -2,6 +2,7 @@
 
 namespace WpDbToolsCli\WpCliCommand;
 
+use WP_CLI;
 use wpdb;
 
 /**
@@ -91,6 +92,8 @@ SQL;
 	 * [--delete]
 	 * : Delete all found entries.
 	 *
+	 * @subcommand orphan-meta
+	 *
 	 * @param array $args
 	 * @param array $assoc_args
 	 */
@@ -98,7 +101,7 @@ SQL;
 
 		if ( empty( $assoc_args['type'] ) ) {
 			$type = 'post';
-		} elseif ( in_array( [ 'comment', 'post', 'term', 'user' ], $assoc_args['type'], true ) ) {
+		} elseif ( in_array( $assoc_args['type'], [ 'comment', 'post', 'term', 'user' ], true ) ) {
 			$type = $assoc_args['type'];
 		} else {
 			return;
@@ -129,7 +132,11 @@ SQL;
 				$query_values
 			);
 
-			$this->db->query( $query );
+			if ( $deleted = (int) $this->db->query( $query ) ) {
+				WP_CLI::success( "Deleted {$deleted} entries" );
+			} else {
+				WP_CLI::error( 'No entries deleted.' );
+			}
 		}
 	}
 
