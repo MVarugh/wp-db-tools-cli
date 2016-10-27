@@ -83,13 +83,13 @@ SQL;
 	/**
 	 * Lists the IDs of all meta entries without existing object.
 	 *
-	 * ## Options
+	 * ## OPTIONS
 	 *
-	 * [--delete] Optional. Delete all found entries?
-	 * [--type] Optional. Object type (possible ones are "comment", "post", "term" and "user"). Defaults to "post".
+	 * [--type=<type>]
+	 * : Object type (possible ones are "comment", "post", "term" and "user"). Defaults to "post".
 	 *
-	 * @synopsis [--delete]
-	 * @synopsis [--type=<TYPE>]
+	 * [--delete]
+	 * : Delete all found entries.
 	 *
 	 * @param array $args
 	 * @param array $assoc_args
@@ -123,7 +123,7 @@ SQL;
 
 		echo implode( PHP_EOL, $results ) . PHP_EOL;
 
-		if ( array_key_exists( 'delete', $assoc_args )) {
+		if ( array_key_exists( 'delete', $assoc_args ) ) {
 			$query = vsprintf(
 				'DELETE FROM `%1$s` WHERE `%2$s` IN ( ' . implode( ',', $results ) . ' )',
 				$query_values
