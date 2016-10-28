@@ -119,8 +119,6 @@ SQL;
 
 		$results = $this->db->get_col( $query );
 		if ( ! $results ) {
-			echo 'No entries found.' . PHP_EOL;
-
 			return;
 		}
 
