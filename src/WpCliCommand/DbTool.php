@@ -89,6 +89,9 @@ SQL;
 	 * [--type=<type>]
 	 * : Object type (possible ones are "comment", "post", "term" and "user"). Defaults to "post".
 	 *
+	 * [--count]
+	 * : Print the number of found entries instead of the according IDs.
+	 *
 	 * [--delete]
 	 * : Delete all found entries.
 	 *
@@ -117,21 +120,33 @@ SQL;
 			$query_values
 		);
 
+		$count = array_key_exists( 'count', $assoc_args );
+
 		$results = $this->db->get_col( $query );
 		if ( ! $results ) {
+			if ( $count ) {
+				echo 'No entries found.' . PHP_EOL;
+			}
+
 			return;
 		}
 
-		echo implode( PHP_EOL, $results ) . PHP_EOL;
+		if ( $count ) {
+			echo 'Entries found: ' . count( $results ) . PHP_EOL;
+		} else {
+			echo implode( PHP_EOL, $results ) . PHP_EOL;
+		}
 
 		if ( array_key_exists( 'delete', $assoc_args ) ) {
+			echo PHP_EOL;
+
 			$query = vsprintf(
 				'DELETE FROM `%1$s` WHERE `%2$s` IN ( ' . implode( ',', $results ) . ' )',
 				$query_values
 			);
 
 			if ( $deleted = (int) $this->db->query( $query ) ) {
-				WP_CLI::success( "Deleted {$deleted} entries" );
+				WP_CLI::success( "Entries deleted: {$deleted}" );
 			} else {
 				WP_CLI::error( 'No entries deleted.' );
 			}
