@@ -2,7 +2,8 @@
 
 Provides commands to manipulate database tables.
 
-Work in progress.
+## UNMAINTAINED
+**Note:** This version of the plugin is not maintained anymore.
 
 ## Commands
 
